@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AXON-313 | حيث تتجسد الرؤية الهندسية</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="AXON-313: نصمم وننفذ حلولاً تقنية وهندسية متكاملة تتجاوز المألوف. إبداع، دقة، وفخامة في كل تفصيل." />
+    <meta name="keywords" content="هندسة، تقنية، تصميم، حلول متكاملة، إبداع، دقة، فخامة, AXON-313, برمجة, تحكم, كهرباء, شبكات, العراق" />
+    <meta name="author" content="AXON-313" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://img.icons8.com/fluency/48/000000/processor.png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome (CSS Version) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- GLightbox CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+
+    <!-- Libraries JS (Defer loading for better performance) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js" defer></script>
+
+    <!-- Main Stylesheet -->
+    <style>
+        /* =============== متغيرات CSS =============== */
+        :root {
+            --primary: #0f1324; --primary-dark: #0a0d17; --dark: #060d1f; --dark-alt: #111827;
+            --text: #e2e8f0; --text-light: #f8fafc; --text-muted: #94a3b8;
+            --accent: #fcd34d; --accent-gold: #f59e0b; --accent-gold-alt: #fcd34d; --accent-silver: #cbd5e1;
+            --gold: #f59e0b; --gold-light: #fcd34d;
+            --card-border-color: rgba(252, 211, 77, 0.15); --shadow: rgba(2, 12, 27, 0.5);
+            --scroll-bar: rgba(245, 158, 11, 0.6); --border-glow: rgba(245, 158, 11, 0.15);
+            --base-font-size: 16px; --biggest-font-size: clamp(3.5rem, 8vw, 6rem);
+            --h1-font-size: clamp(2.8rem, 7vw, 4.5rem); --h2-font-size: clamp(2.2rem, 6vw, 3.5rem);
+            --h3-font-size: clamp(1.5rem, 4vw, 2rem); --normal-font-size: 1.1rem;
+            --small-font-size: 1rem; --smaller-font-size: 0.9rem;
+            --font-light: 300; --font-normal: 400; --font-medium: 500; --font-bold: 700; --font-black: 900;
+            --mb-0-5: 0.5rem; --mb-1: 1rem; --mb-1-5: 1.5rem; --mb-2: 2rem; --mb-2-5: 2.5rem;
+            --mb-3: 3rem; --mb-4: 4rem; --mb-5: 5rem; --mb-6: 6rem;
+            --z-back: -10; --z-normal: 1; --z-tooltip: 10; --z-fixed: 1000; --z-modal: 2000; --z-preloader: 10000;
+            --transition-speed-normal: 0.5s; --transition-speed-fast: 0.3s;
+            --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1); --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+            --ease-elastic: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+            --transition-smooth: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --container-width: 1280px; --grid-gap: 2.5rem; --radius-md: 10px; --hover-lift: -8px;
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-size: var(--base-font-size); }
+        body {
+            background-color: var(--dark); color: var(--text); font-family: 'Tajawal', sans-serif;
+            font-size: var(--normal-font-size); line-height: 1.7; overflow-x: hidden;
+            min-height: 100vh; position: relative; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+        }
+        body.preloading { overflow: hidden; }
+        ul, ol { list-style: none; }
+        a { text-decoration: none; color: inherit; transition: color var(--transition-speed-fast) ease; }
+        a:hover { color: var(--gold); }
+        img { max-width: 100%; height: auto; display: block; }
+        button, input, textarea, select { font: inherit; border: none; background: none; color: inherit; outline-color: var(--gold); }
+        button { cursor: pointer; }
+        h1, h2, h3, h4, h5, h6 { font-weight: var(--font-bold); color: var(--text-light); line-height: 1.3; margin-bottom: var(--mb-1-5); }
+        h1 { font-size: var(--h1-font-size); font-weight: var(--font-black); }
+        h2 { font-size: var(--h2-font-size); } h3 { font-size: var(--h3-font-size); }
+        p { margin-bottom: var(--mb-2); max-width: 65ch; }
+        .container { max-width: var(--container-width); margin-left: auto; margin-right: auto; padding-left: 1.5rem; padding-right: 1.5rem; }
+        .grid { display: grid; gap: var(--grid-gap); }
+        .section { padding: 6rem 0; position: relative; overflow: hidden; }
+        .preloader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--primary-dark);
+            display: flex; justify-content: center; align-items: center; z-index: var(--z-preloader);
+            opacity: 1; transition: opacity 0.8s ease-out 0.5s, visibility 0.8s ease-out 0.5s; visibility: visible;
+        }
+        .preloader--hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .preloader__logo {
+            font-family: 'Tajawal', sans-serif; font-size: clamp(3rem, 15vw, 8rem); font-weight: var(--font-black);
+            color: var(--accent-gold); opacity: 0; animation: preloadFade 1.5s ease-in-out forwards;
+        }
+        @keyframes preloadFade { 0% { opacity: 0; transform: scale(0.9); } 50% { opacity: 1; transform: scale(1.05); } 100% { opacity: 0; transform: scale(0.9); } }
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 0.8rem;
+            padding: 12px 30px; border: 1px solid var(--gold); border-radius: 6px; font-weight: var(--font-bold);
+            cursor: pointer; transition: var(--transition-smooth); background: transparent;
+            color: var(--gold); text-align: center; white-space: nowrap; font-size: 1rem;
+        }
+        .btn i { transition: transform 0.3s ease; }
+        .btn:hover { background: var(--gold); color: var(--primary-dark); transform: translateY(var(--hover-lift)); box-shadow: 0 8px 20px rgba(245, 158, 11, 0.25); }
+        .btn:hover i { transform: translateX(4px); }
+        .btn-accent { background: var(--accent-gold); color: var(--primary-dark); border-color: var(--accent-gold); }
+        .btn-accent:hover { background: var(--gold); }
+        .btn-gold { background: var(--gold); color: var(--primary-dark); border-color: var(--gold); }
+        .btn-gold:hover { background: var(--accent-gold); }
+        .card {
+            background: var(--dark-alt); border: 1px solid var(--card-border-color); border-radius: var(--radius-md);
+            padding: 2.5rem 2rem; text-align: center; transition: var(--transition-smooth); position: relative;
+            overflow: hidden; display: flex; flex-direction: column;
+        }
+        .card:hover { transform: translateY(var(--hover-lift)) scale(1.02); border-color: var(--accent-gold); box-shadow: 0 15px 35px rgba(245, 158, 11, 0.15); background: linear-gradient(145deg, rgba(26, 32, 53, 0.7), rgba(32, 39, 65, 0.85)); }
+        .card__icon { font-size: 3rem; color: var(--accent-gold); margin-bottom: 1.5rem; transition: transform var(--transition-speed-normal) var(--ease-out-expo); display: inline-block; }
+        .card:hover .card__icon { transform: translateY(-5px) scale(1.15) rotate(8deg); }
+        .card__title { font-size: var(--h3-font-size); margin-bottom: var(--mb-1); color: var(--text-light); font-weight: var(--font-bold); }
+        .card__description { font-size: var(--small-font-size); color: var(--text-muted); line-height: 1.7; margin-bottom: var(--mb-2); flex-grow: 1; }
+        .card .btn { padding: 10px 25px; font-size: 0.95rem; margin-top: auto; align-self: center; }
+        .contact__content { position: relative; margin-bottom: 1.5rem; }
+        .contact-input { width: 100%; padding: 18px 22px; border: 1px solid var(--card-border-color); border-radius: 6px; background: var(--primary-dark); color: var(--text); font-size: var(--normal-font-size); transition: var(--transition-smooth); }
+        .contact-input::placeholder { color: transparent; }
+        .contact-input:focus { border-color: var(--accent-gold); box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.1); }
+        .contact-textarea { resize: vertical; min-height: 150px; }
+        .contact__label { position: absolute; top: 18px; right: 22px; font-size: var(--normal-font-size); color: var(--text-muted); pointer-events: none; transition: all 0.3s ease; background-color: var(--primary-dark); padding: 0 5px; }
+        .contact-input:focus + .contact__label, .contact-input:not(:placeholder-shown) + .contact__label { top: -10px; font-size: var(--smaller-font-size); color: var(--accent-gold); }
+        .scrollup { position: fixed; right: 25px; bottom: -100px; background: var(--accent-gold); color: var(--primary-dark); width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; z-index: var(--z-tooltip); transition: bottom 0.4s ease, opacity 0.4s ease, transform 0.3s ease; opacity: 0; visibility: hidden; border: none; }
+        .scrollup.show-scroll { bottom: 90px; opacity: 1; visibility: visible; }
+        .scrollup:hover { background: var(--gold); transform: scale(1.1); }
+        .wa-btn { position: fixed; bottom: 25px; left: 25px; width: 55px; height: 55px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFF; font-size: 2rem; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3); z-index: var(--z-modal); transition: var(--transition-smooth); }
+        .wa-btn:hover { transform: scale(1.1) rotate(10deg); box-shadow: 0 12px 28px rgba(37, 211, 102, 0.4); }
+
+        /* =============== الهيدر والتنقل (القائمة يمين، الشعار أقصى اليسار في الحاسوب) =============== */
+        .header {
+            position: fixed; top: 0; left: 0; width: 100%; background: transparent; z-index: var(--z-fixed);
+            transition: background-color var(--transition-speed-normal) var(--ease-in-out-cubic),
+                        padding var(--transition-speed-normal) var(--ease-in-out-cubic),
+                        box-shadow var(--transition-speed-normal) var(--ease-in-out-cubic);
+            padding: 1.2rem 0;
+        }
+        .header.scrolled {
+            background: hsla(228, 30%, 8%, 0.9);
+            backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.35); padding: 0.8rem 0;
+        }
+        .nav {
+            height: 50px;
+            display: flex;
+            align-items: center;
+            /* justify-content: space-between;  <-- لا نحتاجها هنا لشاشات الحاسوب */
+        }
+
+        /* القائمة ستأخذ مكانها على اليمين (لأنها العنصر الأول في HTML مع dir=rtl) */
+        .nav__menu {
+             display: flex;
+             align-items: center;
+             /* margin-right: auto; <-- تمت إزالة هذا السطر */
+        }
+        .nav__list {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+        .nav__link {
+            color: var(--text); font-weight: var(--font-medium); position: relative; padding: 0.5rem 0;
+            font-size: 1.05rem;
+            transition: color var(--transition-speed-fast) ease;
+        }
+        .nav__link::before {
+            content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 0; height: 2px; background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        .nav__link:hover, .nav__link.active-link { color: var(--accent); }
+        .nav__link:hover::before, .nav__link.active-link::before { width: 70%; }
+
+        /* الشعار سيتم دفعه إلى أقصى اليسار */
+        .nav__logo {
+            font-size: 2.2rem;
+            font-weight: var(--font-black);
+            color: var(--accent-gold);
+            letter-spacing: 1px;
+            transition: color var(--transition-speed-fast) ease, transform var(--transition-speed-fast) ease;
+            margin-left: auto; /* *** هذا يدفع الشعار إلى أقصى اليسار *** */
+        }
+        .nav__logo:hover { color: var(--accent-gold-alt); transform: scale(1.03); }
+
+
+        .nav__toggle, .nav__close {
+            display: none;
+            font-size: 2.2rem;
+            cursor: pointer;
+            color: var(--accent-silver);
+            transition: color 0.3s, transform 0.3s;
+        }
+        .nav__toggle:hover, .nav__close:hover { color: var(--accent-gold); transform: scale(1.1); }
+
+        /* تعديلات القائمة لشاشات الموبايل */
+        @media screen and (max-width: 992px) {
+            .nav {
+                /* في الموبايل، الشعار يمين والزر يسار */
+                justify-content: space-between;
+            }
+             .nav__menu { /* القائمة الجانبية */
+                position: fixed; background-color: rgba(10,13,23,0.98);
+                backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+                width: 85%; max-width: 380px; height: 100%; top: 0; right: -100%;
+                padding: 6rem 2.5rem 4rem; transition: right var(--transition-speed-normal) var(--ease-out-expo);
+                border-left: 1px solid var(--card-border-color); box-shadow: -10px 0 30px rgba(0,0,0,0.3);
+                z-index: var(--z-modal);
+                display: flex;
+                flex-direction: column;
+                margin-left: 0; /* التأكد من عدم وجود هوامش تلقائية هنا */
+                margin-right: 0; /* التأكد من عدم وجود هوامش تلقائية هنا */
+            }
+            .nav__logo {
+                margin-left: 0; /* إعادة تعيين الهامش الأيسر للشعار في الموبايل */
+            }
+            .nav__list {
+                flex-direction: column;
+                gap: 2.5rem;
+                text-align: center;
+                width: 100%;
+                margin-top: 2rem;
+            }
+            .nav__link { font-size: 1.4rem; font-weight: var(--font-bold); display: block; padding: 0.8rem 0; }
+            .nav__close { position: absolute; top: 1.5rem; right: 1.8rem; display: block; }
+            .nav__toggle { display: block; }
+            .show-menu { right: 0; }
+        }
+
+        /* =============== الأقسام (مع توسيط نص الهيرو) =============== */
+        #home { min-height: 100vh; width: 100vw; position: relative; display: flex; align-items: center; padding-top: 80px; overflow: hidden; }
+        #home::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%; background: linear-gradient(to top, var(--dark) 15%, rgba(6,13,31,0) 100%); z-index: 0; pointer-events: none; }
+        .hero-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .hero-content { position: relative; z-index: 1; max-width: 850px; margin-left: auto; margin-right: auto; padding: 2rem 0; text-align: center; }
+        .subtitle { font-size: 1.5rem; color: var(--accent); margin-bottom: var(--mb-1); font-weight: var(--font-medium); display: block; }
+        .hero-content h1 { margin-bottom: var(--mb-2); }
+        .highlight-gold { background: linear-gradient(90deg, var(--gold-light), var(--accent-gold)); -webkit-background-clip: text; background-clip: text; color: transparent; font-weight: var(--font-black); padding-bottom: 4px; }
+        .hero-content p { color: var(--text-muted); max-width: 55ch; font-size: 1.2rem; margin-left: auto; margin-right: auto; }
+        .hero-buttons { display: flex; gap: 1.5rem; margin-top: var(--mb-3); flex-wrap: wrap; justify-content: center; }
+        .hero-buttons .btn:hover i { transform: translateX(4px); }
+        #services .section-title { color: var(--text-light); }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--grid-gap, 2.5rem); }
+        .service-card { min-height: 320px; } .service-card h3 { font-size: 1.6rem; }
+        .service-card .btn:hover i { transform: translateX(4px); }
+        #about .section-title { color: var(--text-light); }
+        .about__container { display: flex; flex-wrap: wrap; align-items: center; gap: 4rem; }
+        .about__img { flex: 1 1 40%; min-width: 280px; position: relative; border-radius: var(--radius-md); overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
+        .about__img::before { content: ''; position: absolute; inset: -15px; border: 2px solid var(--accent-gold); border-radius: 18px; opacity: 0.1; z-index: -1; transition: all 0.5s var(--ease-out-expo); pointer-events: none; }
+        .about__img:hover::before { opacity: 0.3; transform: rotate(2deg) scale(1.02); }
+        .about__img img { border-radius: var(--radius-md); filter: saturate(1.1); transition: filter 0.4s ease, transform 0.4s ease; }
+        .about__img:hover img { filter: saturate(1); transform: scale(1.03); }
+        .about__data { flex: 1 1 55%; min-width: 300px; }
+        .about__description { font-size: 1.1rem; color: var(--text-muted); margin-bottom: var(--mb-3); line-height: 1.8; }
+        .about__info { display: grid; gap: 1.5rem; margin-top: 2rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+        .about__info-item { background: var(--dark-alt); border: 1px solid var(--card-border-color); border-radius: 8px; padding: 1.5rem; transition: var(--transition-smooth); display: flex; flex-direction: column; }
+        .about__info-item:hover { transform: translateY(-5px); border-color: var(--accent-gold); box-shadow: 0 10px 25px rgba(245,158,11,0.1); }
+        .about__info-title { font-size: 1.2rem; color: var(--text-light); font-weight: var(--font-bold); display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem; }
+        .about__info-icon { color: var(--gold); font-size: 1.8rem; flex-shrink: 0; }
+        .about__info-subtitle { font-size: var(--small-font-size); color: var(--text-muted); margin-top: 0.5rem; }
+        .about__data .btn:hover i { transform: translateX(4px); }
+        #gallery { background: var(--dark-alt); }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+        .gallery-item { overflow: hidden; border-radius: var(--radius-md); position: relative; box-shadow: 0 8px 20px rgba(0,0,0,0.25); transition: transform 0.4s ease, box-shadow 0.4s ease; display: block; }
+        .gallery-item::after { content: '\f00e'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; inset: 0; background: rgba(15,19,36,0.7); color: var(--accent); font-size: 2.5rem; display: flex; align-items: center; justify-content: center; opacity: 0; transform: scale(0.8); transition: opacity 0.3s ease, transform 0.3s ease; pointer-events: none; }
+        .gallery-item img { width: 100%; height: 280px; object-fit: cover; transition: transform 0.4s ease; }
+        .gallery-item:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 12px 30px rgba(0,0,0,0.35); }
+        .gallery-item:hover img { transform: scale(1.08); }
+        .gallery-item:hover::after { opacity: 1; transform: scale(1); }
+        #contact .section-title, #contact .section-subtitle { margin-bottom: 2rem; }
+        .contact__layout { display: grid; grid-template-columns: 1fr; gap: 3rem; margin-top: 3rem; }
+        @media screen and (min-width: 992px) { .contact__layout { grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; } }
+        .contact-container { background: var(--dark-alt); border: 1px solid var(--card-border-color); border-radius: var(--radius-md); padding: 3rem 2.5rem; }
+        .contact-container h2 { font-size: 1.8rem; font-weight: var(--font-bold); margin-bottom: var(--mb-1); color: var(--text-light); }
+        .contact-container p { font-size: var(--normal-font-size); color: var(--text-muted); margin-bottom: var(--mb-2-5); }
+        .contact-form { display: grid; gap: 0.5rem; }
+        .contact-form .btn { margin-top: 1.5rem; width: 100%; }
+        .contact-form .btn:hover i { transform: translateX(4px); }
+        .contact__details { display: flex; flex-direction: column; gap: 2rem; }
+        .contact__information { display: flex; align-items: center; gap: 1.5rem; }
+        .contact__icon { font-size: 2rem; color: var(--gold); width: 30px; text-align: center; flex-shrink: 0; }
+        .contact__text_container { text-align: right; }
+        .contact__title { font-size: 1.1rem; color: var(--text-light); font-weight: var(--font-bold); margin-bottom: 0.3rem; }
+        .contact__subtitle { font-size: var(--small-font-size); color: var(--text-muted); }
+        footer { background: var(--primary-dark); text-align: center; padding: 4rem 0 2rem; border-top: 1px solid rgba(255,255,255,0.08); margin-top: 6rem; }
+        .footer__container { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+        .footer__title { font-size: 2rem; font-weight: var(--font-black); color: var(--accent-gold); margin-bottom: 0.5rem; }
+        .footer__description { color: var(--text-muted); font-size: var(--small-font-size); max-width: 45ch; margin-bottom: 1.5rem; }
+        .social-links { display: flex; gap: 1.5rem; margin-bottom: 1.5rem; }
+        .social-links a { color: var(--text-muted); font-size: 1.3rem; transition: color 0.3s ease, transform 0.3s ease; }
+        .social-links a:hover { color: var(--accent-gold); transform: translateY(-3px) scale(1.1); }
+        .footer__list { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem 2rem; margin-bottom: 2rem; }
+        .footer__list .nav__link { font-size: var(--small-font-size); color: var(--text-muted); }
+        .footer__list .nav__link:hover { color: var(--accent); }
+        .footer__list .nav__link::before { display: none; }
+        .footer__copy { font-size: var(--smaller-font-size); color: var(--text-muted); opacity: 0.8; }
+        .text-center { text-align: center; }
+        .section-title { font-size: var(--h2-font-size); font-weight: var(--font-bold); text-align: center; margin-bottom: 1.5rem; color: var(--text-light); }
+        .section-subtitle { font-size: var(--h3-font-size); color: var(--text-muted); text-align: center; margin-bottom: 4rem; font-weight: var(--font-light); max-width: 60ch; margin-left: auto; margin-right: auto; }
+        .highlight { color: var(--accent-gold); } .mt-3 { margin-top: var(--mb-1-5); }
+        ::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: var(--dark-alt); }
+        ::-webkit-scrollbar-thumb { background: var(--scroll-bar); border-radius: 10px; border: 2px solid var(--dark-alt); }
+        ::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+        @media screen and (max-width: 768px) {
+            :root { --grid-gap: 1.5rem; } .section { padding: 4rem 0; }
+            .hero-content { padding: 1rem 0; } .hero-content h1 { font-size: clamp(2.5rem, 8vw, 3.5rem); }
+            .hero-content p { font-size: 1.1rem; } .btn { padding: 10px 25px; font-size: 0.95rem; }
+            .services-grid, .gallery-grid, .about__info { grid-template-columns: 1fr; }
+            .about__container { gap: 2rem; } .contact__layout { grid-template-columns: 1fr; }
+            .contact-container { padding: 2rem 1.5rem; } footer { padding: 3rem 0 1.5rem; }
+            .wa-btn { width: 50px; height: 50px; font-size: 1.8rem; left: 15px; bottom: 15px; }
+            .scrollup { width: 40px; height: 40px; right: 15px; bottom: -100px; font-size: 1rem; }
+            .scrollup.show-scroll { bottom: 75px; }
+        }
+        @media screen and (max-width: 520px) {
+            .services-grid, .gallery-grid { grid-template-columns: 1fr; }
+            .card, .service-card, .gallery-item { padding: 2rem 1.5rem; }
+            .card__title, .service-card h3 { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body class="preloading">
+    <div class="preloader" id="preloader">
+        <div class="preloader__logo">AXON-313</div>
+    </div>
+
+    <header class="header" id="header">
+        <nav class="nav container">
+          <a href="#home" class="nav__logo">AXON-313</a>
+      
+          <div class="nav__menu" id="nav-menu">
+            <ul class="nav__list">
+              <li class="nav__item"><a href="#home" class="nav__link active-link">الرئيسية</a></li>
+              <li class="nav__item"><a href="#services" class="nav__link">خدماتنا</a></li>
+              <li class="nav__item"><a href="#about" class="nav__link">عن AXON</a></li>
+              <li class="nav__item"><a href="#gallery" class="nav__link">معرض الأعمال</a></li>
+              <li class="nav__item"><a href="#contact" class="nav__link">تواصل معنا</a></li>
+            </ul>
+          </div>
+        </nav>
+      </header>
+      
+    <main class="main">
+        <section id="home">
+            <canvas id="hero-canvas" class="hero-canvas"></canvas>
+            <div class="container hero-content">
+                <span class="subtitle" data-scroll>AXON-313</span>
+                <h1 data-scroll data-scroll-delay="0.1">
+                    <span class="highlight-gold">نصوغ المستقبل</span><br>بـ دقة هندسية وإبداع رقمي
+                </h1>
+                <p data-scroll data-scroll-delay="0.2">
+                    نترجم طموحاتك إلى واقع ملموس من خلال حلول تقنية متكاملة تجمع بين الأداء الفائق والتصميم الذي يأسر الألباب.
+                </p>
+                <div class="hero-buttons" data-scroll data-scroll-delay="0.3">
+                    <a href="#services" class="btn btn-accent">اكتشف حلولنا <i class="fas fa-arrow-left"></i></a>
+                    <a href="#gallery" class="btn btn-gold">شاهد إبداعاتنا <i class="fas fa-camera"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section">
+            <div class="container">
+                <h2 class="section-title" data-scroll>خدمات مصممة للتميز</h2>
+                <p class="section-subtitle" data-scroll data-scroll-delay="0.1">
+                    نقدم باقة حصرية من الحلول التقنية التي تلبي أرقى المعايير وتتجاوز التوقعات.
+                </p>
+                <div class="services-grid">
+                    <div class="service-card card" data-scroll> <i class="fas fa-laptop-code card__icon"></i> <h3 class="card__title">تطبيقات تتنفس حياة</h3> <p class="card__description">نصمم تجارب رقمية فريدة عبر تطبيقات ويب وموبايل تتسم بالذكاء والأناقة.</p> <a href="#" class="btn btn-gold">اعرف المزيد <i class="fas fa-chevron-left"></i></a> </div>
+                    <div class="service-card card" data-scroll data-scroll-delay="0.1"> <i class="fas fa-brain card__icon"></i> <h3 class="card__title">ذكاء اصطناعي وتحكم</h3> <p class="card__description">نمنح مشاريعك القدرة على التفكير والتفاعل من خلال أنظمة تحكم وأتمتة متقدمة.</p> <a href="#" class="btn btn-gold">اعرف المزيد <i class="fas fa-chevron-left"></i></a> </div>
+                    <div class="service-card card" data-scroll data-scroll-delay="0.2"> <i class="fas fa-eye card__icon"></i> <h3 class="card__title">رؤية تتخطى الحدود</h3> <p class="card__description">نوفر حلول مراقبة بصرية فائقة الدقة مع تحليلات ذكية لأمان لا مثيل له.</p> <a href="#" class="btn btn-gold">اعرف المزيد <i class="fas fa-chevron-left"></i></a> </div>
+                    <div class="service-card card" data-scroll> <i class="fas fa-network-wired card__icon"></i> <h3 class="card__title">بنية تحتية رقمية</h3> <p class="card__description">نؤسس شبكات اتصالات وبيانات قوية وموثوقة لتكون أساساً لنمو أعمالك.</p> <a href="#" class="btn btn-gold">اعرف المزيد <i class="fas fa-chevron-left"></i></a> </div>
+                    <div class="service-card card" data-scroll data-scroll-delay="0.1"> <i class="fas fa-plug card__icon"></i> <h3 class="card__title">طاقة المستقبل الذكية</h3> <p class="card__description">نصمم وننفذ أنظمة كهربائية آمنة وفعالة مع إمكانيات تحكم ذكية ومستدامة.</p> <a href="#" class="btn btn-gold">اعرف المزيد <i class="fas fa-chevron-left"></i></a> </div>
+                    <div class="service-card card" data-scroll data-scroll-delay="0.2"> <i class="fas fa-cubes-stacked card__icon"></i> <h3 class="card__title">أنظمة تحكم ثلاثية الأبعاد</h3> <p class="card__description">نبتكر واجهات تحكم 3D تفاعلية متقدمة للأنظمة المعقدة والمحاكاة الصناعية بدقة فائقة.</p> <a href="#" class="btn btn-gold">اعرف المزيد <i class="fas fa-chevron-left"></i></a> </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title" data-scroll>لماذا AXON-313 تجسيد للتميز؟</h2>
+                <div class="about__container">
+                    <div class="about__img" data-scroll data-scroll-delay="0.2"> <img src="images/about-axon-team-office.jpg" alt="فريق AXON-313 يعمل بشغف وتفانٍ في بيئة عمل حديثة"> </div>
+                    <div class="about__data" data-scroll>
+                        <p class="about__description"> نحن لا نقدم مجرد منتجات وخدمات، بل تجربة متكاملة تعكس شغفنا بالكمال. نجمع بين الحرفية الدقيقة، الابتكار الجريء، والالتزام الراسخ بأعلى معايير الجودة العالمية، لنصنع لك حلولاً تقنية ترتقي بأسلوب حياتك وعملك. </p>
+                        <div class="about__info">
+                            <div class="about__info-item"> <h4 class="about__info-title"> <i class="fas fa-crown about__info-icon"></i> جودة ملكية </h4> <p class="about__info-subtitle">نستخدم أجود المواد ونتبع أدق عمليات التصنيع والتنفيذ لضمان نتائج استثنائية.</p> </div>
+                            <div class="about__info-item"> <h4 class="about__info-title"> <i class="fas fa-brain about__info-icon"></i> ابتكار يفوق الخيال </h4> <p class="about__info-subtitle">نصمم حلولاً ذكية ومخصصة تتنبأ باحتياجاتك المستقبلية وتفتح آفاقاً جديدة.</p> </div>
+                            <div class="about__info-item"> <h4 class="about__info-title"> <i class="fas fa-user-tie about__info-icon"></i> خدمة عملاء استثنائية </h4> <p class="about__info-subtitle">تجربة دعم شخصية وراقية تضمن رضاك التام في كل خطوة من خطوات المشروع.</p> </div>
+                            <div class="about__info-item"> <h4 class="about__info-title"> <i class="fas fa-shield-alt about__info-icon"></i> التزام بالمعايير </h4> <p class="about__info-subtitle">نلتزم بأعلى المعايير العالمية في الجودة والأمان لتقديم حلول موثوقة.</p> </div>
+                        </div> <a href="#contact" class="btn btn-accent mt-3">ابدأ مشروعك معنا <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="section">
+            <div class="container">
+                <h2 class="section-title" data-scroll>معرض الأعمال</h2>
+                <p class="section-subtitle" data-scroll data-scroll-delay="0.1"> استكشف أبرز مشاريعنا التي تجمع بين الإبداع الهندسي والدقة التقنية. </p>
+                <div class="gallery-grid">
+                    <a href="2.webp" class="glightbox gallery-item" data-gallery="work-gallery" data-scroll> <img src="2.webp" alt="تأسيس كهربائي دقيق لمنزل ذكي"> </a>
+                    <a href="camera.webp" class="glightbox gallery-item" data-gallery="work-gallery" data-scroll data-scroll-delay="0.1"> <img src="camera.webp"  alt="تصميم نظام مراقبة ذكي بكاميرات عالية الدقة"> </a>
+                    <a href="3.jpg" class="glightbox gallery-item" data-gallery="work-gallery" data-scroll data-scroll-delay="0.2"> <img src="3.jpg" alt="تركيب أنظمة تحكم ذكية في مبنى تجاري"> </a>
+                    <a href="4.jpg" class="glightbox gallery-item" data-gallery="work-gallery" data-scroll> <img src="4.jpg" alt="مشروع بنية تحتية رقمية لشبكة بيانات متطورة"> </a>
+                    <a href="5.jpg" class="glightbox gallery-item" data-gallery="work-gallery" data-scroll data-scroll-delay="0.1"> <img src="5.jpg" alt="تطوير تطبيق ويب مخصص لإدارة المشاريع"> </a>
+                    <a href="6.jpg" class="glightbox gallery-item" data-gallery="work-gallery" data-scroll data-scroll-delay="0.2"> <img src="6.jpg" alt="نظام تحكم صناعي متقدم باستخدام PLC"> </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section">
+            <div class="container">
+                <h2 class="section-title" data-scroll>ابدأ رحلتك نحو التميز</h2>
+                <p class="section-subtitle" data-scroll data-scroll-delay="0.1"> تواصل معنا اليوم ودعنا نحول رؤيتك إلى واقع ملموس بأعلى معايير الجودة والابتكار. </p>
+                <div class="contact__layout">
+                    <div class="contact-container" data-scroll>
+                        <h2>لديك مشروع طموح؟ دعنا نساعدك</h2> <p>املأ النموذج أدناه وسيقوم أحد خبرائنا بالتواصل معك لتقديم استشارة مجانية.</p>
+                        <form action="#" method="POST" class="contact-form">
+                            <div class="contact__content"> <input type="text" id="name" name="name" class="contact-input" placeholder=" " required> <label for="name" class="contact__label">الاسم الكامل</label> </div>
+                            <div class="contact__content"> <input type="email" id="email" name="email" class="contact-input" placeholder=" " required> <label for="email" class="contact__label">البريد الإلكتروني</label> </div>
+                            <div class="contact__content"> <input type="tel" id="phone" name="phone" class="contact-input" placeholder=" "> <label for="phone" class="contact__label">رقم الهاتف (اختياري)</label> </div>
+                            <div class="contact__content"> <textarea id="message" name="message" class="contact-input contact-textarea" placeholder=" " required></textarea> <label for="message" class="contact__label">صف مشروعك أو استفسارك</label> </div>
+                            <button type="submit" class="btn btn-accent">إرسال الطلب <i class="fas fa-paper-plane"></i></button>
+                        </form>
+                    </div>
+                    <div class="contact__details" data-scroll data-scroll-delay="0.2">
+                        <div class="contact__information"> <i class="fas fa-map-marker-alt contact__icon"></i> <div class="contact__text_container"> <h3 class="contact__title">موقعنا</h3> <p class="contact__subtitle">كربلاء، العراق - اليرموك</p> </div> </div>
+                        <div class="contact__information"> <i class="fas fa-phone contact__icon"></i> <div class="contact__text_container"> <h3 class="contact__title">اتصل بنا</h3> <p class="contact__subtitle">+964 7842555287</p> </div> </div>
+                        <div class="contact__information"> <i class="fas fa-envelope contact__icon"></i> <div class="contact__text_container"> <h3 class="contact__title">البريد الإلكتروني</h3> <p class="contact__subtitle">ghaith@AXON-313.com</p> </div> </div>
+                        <div class="contact__information"> <i class="fas fa-clock contact__icon"></i> <div class="contact__text_container"> <h3 class="contact__title">أوقات العمل</h3> <p class="contact__subtitle">الأحد - الخميس: 9:00 صباحًا - 5:00 مساءً</p> </div> </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer__container">
+                <h2 class="footer__title">AXON-313</h2>
+                <p class="footer__description"> نقدم حلولاً تقنية وهندسية متكاملة تتجاوز المألوف. إبداع، دقة، وفخامة في كل تفصيل. </p>
+<div class="social-links">
+  <a href="https://www.facebook.com/ghaith9712" target="_blank" aria-label="فيسبوك">
+    <i class="fab fa-facebook-f"></i>
+  </a>
+  <a href="https://twitter.com/ghaith9712" target="_blank" aria-label="تويتر">
+    <i class="fab fa-twitter"></i>
+  </a>
+  <a href="#" target="_blank" aria-label="لينكد إن">
+    <i class="fab fa-linkedin-in"></i>
+  </a>
+  <a href="https://www.instagram.com/gxg520" target="_blank" aria-label="إنستغرام">
+    <i class="fab fa-instagram"></i>
+  </a>
+</div>
+                <nav class="footer__list"> <a href="#home" class="nav__link">الرئيسية</a> <a href="#services" class="nav__link">خدماتنا</a> <a href="#about" class="nav__link">عن AXON-313</a> <a href="#gallery" class="nav__link">معرض الأعمال</a> <a href="#contact" class="nav__link">تواصل معنا</a> </nav>
+                <p class="footer__copy">© 2024 AXON-313 – جميع الحقوق محفوظة</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/+9647842555287" target="_blank" class="wa-btn" aria-label="تواصل معنا عبر واتساب"> <i class="fab fa-whatsapp"></i> </a>
+    <button class="scrollup" id="scrollUpBtn" aria-label="العودة إلى الأعلى"> <i class="fas fa-arrow-up"></i> </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const preloader = document.getElementById('preloader');
+            const bodyElement = document.body;
+            function initSiteAnimations() {
+                if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                    gsap.registerPlugin(ScrollTrigger);
+                    gsap.utils.toArray('[data-scroll]').forEach((element) => {
+                        const delay = parseFloat(element.getAttribute('data-scroll-delay')) || 0;
+                        gsap.from(element, { opacity: 0, y: 60, duration: 1.2, ease: 'power3.out', delay: delay + 0.2, scrollTrigger: { trigger: element, start: 'top 85%', end: 'bottom 20%', toggleActions: 'play none none reverse', } });
+                    });
+                } else { console.warn('GSAP or ScrollTrigger library not found. Scroll animations disabled.'); }
+            }
+            if (preloader) { window.addEventListener('load', () => { setTimeout(() => { preloader.classList.add('preloader--hidden'); bodyElement.classList.remove('preloading'); initSiteAnimations(); }, 1600); }); }
+            else { bodyElement.classList.remove('preloading'); initSiteAnimations(); }
+            const header = document.getElementById('header');
+            if (header) { window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 50); }, { passive: true }); }
+            const navMenu = document.getElementById('nav-menu');
+            const navToggle = document.getElementById('nav-toggle');
+            const navClose = document.getElementById('nav-close');
+            const navLinks = document.querySelectorAll('.nav__menu .nav__link');
+            if (navToggle && navMenu) { navToggle.addEventListener('click', () => navMenu.classList.add('show-menu')); }
+            if (navClose && navMenu) { navClose.addEventListener('click', () => navMenu.classList.remove('show-menu')); }
+            navLinks.forEach(link => { link.addEventListener('click', () => { if (navMenu) navMenu.classList.remove('show-menu'); }); });
+            const heroCanvasElement = document.getElementById('hero-canvas');
+            const homeSectionElement = document.getElementById('home');
+            if (heroCanvasElement && homeSectionElement && typeof THREE !== 'undefined') {
+                const renderer = new THREE.WebGLRenderer({ canvas: heroCanvasElement, antialias: true, alpha: true });
+                renderer.setSize(homeSectionElement.clientWidth, homeSectionElement.clientHeight); renderer.setPixelRatio(window.devicePixelRatio);
+                const scene = new THREE.Scene(); const camera = new THREE.PerspectiveCamera(75, homeSectionElement.clientWidth / homeSectionElement.clientHeight, 0.1, 1000); camera.position.z = 5;
+                const ambientLight = new THREE.AmbientLight(0x606060, 0.8); scene.add(ambientLight);
+                const styles = getComputedStyle(document.documentElement); const accentGoldCSS = styles.getPropertyValue('--accent-gold').trim(); const accentGoldThree = new THREE.Color(accentGoldCSS);
+                const pointLight = new THREE.PointLight(accentGoldThree, 1.2, 100); pointLight.position.set(2, 3, 4); scene.add(pointLight);
+                const pointLight2 = new THREE.PointLight(0xffffff, 0.4, 100); pointLight2.position.set(-3, -2, -3); scene.add(pointLight2);
+                const geometry = new THREE.IcosahedronGeometry(2.5, 1); const material = new THREE.MeshPhongMaterial({ color: accentGoldThree, wireframe: true, transparent: true, opacity: 0.2, shininess: 60 });
+                const sphere = new THREE.Mesh(geometry, material); scene.add(sphere);
+                let mouseX = 0, mouseY = 0; let windowHalfX = homeSectionElement.clientWidth / 2, windowHalfY = homeSectionElement.clientHeight / 2;
+                homeSectionElement.addEventListener('mousemove', (event) => { const rect = homeSectionElement.getBoundingClientRect(); mouseX = (event.clientX - rect.left - windowHalfX) / 500; mouseY = (event.clientY - rect.top - windowHalfY) / 500; });
+                function animate() { requestAnimationFrame(animate); sphere.rotation.x += 0.001; sphere.rotation.y += 0.0015; camera.position.x += (mouseX - camera.position.x) * 0.02; camera.position.y += (-mouseY - camera.position.y) * 0.02; camera.lookAt(scene.position); renderer.render(scene, camera); } animate();
+                window.addEventListener('resize', () => { const newWidth = homeSectionElement.clientWidth, newHeight = homeSectionElement.clientHeight; windowHalfX = newWidth / 2; windowHalfY = newHeight / 2; camera.aspect = newWidth / newHeight; camera.updateProjectionMatrix(); renderer.setSize(newWidth, newHeight); }, { passive: true });
+            } else { if (!heroCanvasElement) console.warn('#hero-canvas not found.'); if (!homeSectionElement) console.warn('#home not found.'); if (typeof THREE === 'undefined') console.warn('Three.js not found.'); }
+            try { if (typeof GLightbox !== 'undefined') { GLightbox({ selector: '.glightbox', touchNavigation: true, loop: true, openEffect: 'zoom', closeEffect: 'fade', zoomable: true }); } else { console.warn('GLightbox not found.'); } } catch (e) { console.error("GLightbox init failed:", e); }
+            const scrollUpBtn = document.getElementById('scrollUpBtn');
+            if (scrollUpBtn) { window.addEventListener('scroll', () => { scrollUpBtn.classList.toggle('show-scroll', window.scrollY > 400); }, { passive: true }); scrollUpBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' })); }
+            const sections = document.querySelectorAll('section[id]'); const allNavLinks = document.querySelectorAll('.nav__link');
+            if (sections.length > 0 && allNavLinks.length > 0) {
+                window.addEventListener('scroll', () => {
+                    const scrollY = window.scrollY; let currentSectionId = sections[0].getAttribute('id');
+                    sections.forEach(current => { const sectionTop = current.offsetTop - 100; if (scrollY >= sectionTop && scrollY < sectionTop + current.offsetHeight) { currentSectionId = current.getAttribute('id'); } });
+                    allNavLinks.forEach(link => { link.classList.remove('active-link'); if (link.getAttribute('href').substring(1) === currentSectionId) { link.classList.add('active-link'); } });
+                }, { passive: true });
+            }
+        });
+    </script>
+</body>
+</html>
