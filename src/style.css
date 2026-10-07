@@ -139,6 +139,20 @@ textarea {
   transform: scaleX(1);
 }
 
+.header-phone {
+  display: inline-flex;
+  align-items: center;
+  color: var(--brand-deep);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  margin-inline-start: 0.25rem;
+}
+
+.header-phone:hover {
+  color: var(--accent);
+}
+
 .header-cta {
   display: inline-flex;
   align-items: center;
@@ -451,9 +465,21 @@ textarea {
   box-shadow: 0 0 0 3px rgba(12, 107, 110, 0.12);
 }
 
-.contact-form .btn {
-  justify-self: start;
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
   margin-top: 0.35rem;
+}
+
+.btn-ghost-ink {
+  background: transparent;
+  color: var(--brand-deep);
+  border-color: var(--brand);
+}
+
+.btn-ghost-ink:hover {
+  background: rgba(12, 107, 110, 0.08);
 }
 
 .form-note {
@@ -528,6 +554,16 @@ textarea {
   color: var(--ink-soft);
 }
 
+.footer-phone {
+  margin-top: 0.55rem !important;
+  font-weight: 600;
+  color: var(--brand-deep) !important;
+}
+
+.footer-phone a:hover {
+  color: var(--accent);
+}
+
 .footer-copy {
   margin-top: 0.8rem !important;
   font-size: 0.9rem;
@@ -577,7 +613,8 @@ textarea {
     margin-inline-start: auto;
   }
 
-  .header-cta {
+  .header-cta,
+  .header-phone {
     display: none;
   }
 
