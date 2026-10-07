@@ -139,6 +139,11 @@ textarea {
   transform: scaleX(1);
 }
 
+.nav-phone,
+.nav-wa {
+  display: none;
+}
+
 .header-phone {
   display: inline-flex;
   align-items: center;
@@ -644,6 +649,20 @@ textarea {
   .nav a {
     font-size: 1.2rem;
     padding: 0.4rem 0;
+  }
+
+  .nav-phone,
+  .nav-wa {
+    display: block;
+    font-weight: 700;
+    color: var(--brand-deep);
+  }
+
+  .nav-wa {
+    margin-top: 0.35rem;
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--brand);
+    text-align: center;
   }
 
   .hero-copy {
