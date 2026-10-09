@@ -22,13 +22,17 @@ class HomeScreen extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 36),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(24),
             gradient: const LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
-              colors: [AppColors.hero, AppColors.primaryDark],
+              colors: [
+                AppColors.heroStart,
+                AppColors.background,
+                AppColors.heroEnd,
+              ],
             ),
-            border: Border.all(color: AppColors.cardBorder),
+            border: Border.all(color: AppColors.border),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,7 +40,7 @@ class HomeScreen extends StatelessWidget {
               Text(
                 Company.name,
                 style: theme.textTheme.titleMedium?.copyWith(
-                  color: AppColors.gold,
+                  color: AppColors.green,
                   fontWeight: FontWeight.w800,
                 ),
               ),
@@ -47,7 +51,7 @@ class HomeScreen extends StatelessWidget {
                   fontSize: titleSize,
                   fontWeight: FontWeight.w900,
                   height: 1.25,
-                  color: Colors.white,
+                  color: AppColors.blue,
                 ),
               ),
               const SizedBox(height: 14),
@@ -90,7 +94,7 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(service.icon, color: AppColors.gold, size: 32),
+                    Icon(service.icon, color: AppColors.green, size: 32),
                     const SizedBox(height: 14),
                     Text(
                       service.title,
@@ -111,7 +115,7 @@ class HomeScreen extends StatelessWidget {
                     Text(
                       'التفاصيل',
                       style: theme.textTheme.labelLarge?.copyWith(
-                        color: AppColors.gold,
+                        color: AppColors.green,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -136,7 +140,7 @@ class HomeScreen extends StatelessWidget {
                     Text(
                       categoryLabel(product.categoryId),
                       style: theme.textTheme.labelLarge?.copyWith(
-                        color: AppColors.gold,
+                        color: AppColors.green,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -159,7 +163,7 @@ class HomeScreen extends StatelessWidget {
                     Text(
                       formatIqd(product.priceIqd),
                       style: theme.textTheme.titleSmall?.copyWith(
-                        color: AppColors.goldLight,
+                        color: AppColors.blue,
                         fontWeight: FontWeight.w800,
                       ),
                     ),
@@ -296,7 +300,7 @@ class _ValueCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, color: AppColors.gold),
+          Icon(icon, color: AppColors.green),
           const SizedBox(height: 12),
           Text(
             title,

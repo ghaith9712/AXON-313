@@ -65,7 +65,7 @@ class GalleryScreen extends StatelessWidget {
       context: context,
       builder: (context) {
         return Dialog(
-          backgroundColor: AppColors.primaryDark,
+          backgroundColor: AppColors.surface,
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 720),
             child: Column(

@@ -28,7 +28,7 @@ class ServicesScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(service.icon, color: AppColors.gold, size: 34),
+                    Icon(service.icon, color: AppColors.green, size: 34),
                     const SizedBox(height: 14),
                     Text(
                       service.title,

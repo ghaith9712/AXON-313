@@ -82,20 +82,18 @@ class AppShell extends StatelessWidget {
           NavigationRail(
             extended: extended,
             minExtendedWidth: 220,
-            backgroundColor: AppColors.primaryDark,
+            backgroundColor: AppColors.surface,
             selectedIndex: hidden ? 0 : _index,
             groupAlignment: -1,
             onDestinationSelected: (index) => context.go(_paths[index]),
-            indicatorColor: hidden
-                ? Colors.transparent
-                : AppColors.gold.withValues(alpha: 0.18),
+            indicatorColor: hidden ? Colors.transparent : AppColors.greenLight,
             selectedIconTheme: IconThemeData(
-              color: hidden ? AppColors.muted : AppColors.gold,
+              color: hidden ? AppColors.muted : AppColors.blue,
             ),
             unselectedIconTheme: const IconThemeData(color: AppColors.muted),
             selectedLabelTextStyle: Theme.of(context).textTheme.labelLarge
                 ?.copyWith(
-                  color: hidden ? AppColors.muted : AppColors.gold,
+                  color: hidden ? AppColors.muted : AppColors.blue,
                   fontWeight: FontWeight.w700,
                 ),
             unselectedLabelTextStyle: Theme.of(context).textTheme.labelLarge
@@ -113,7 +111,7 @@ class AppShell extends StatelessWidget {
                   child: Text(
                     extended ? 'AXON-313' : 'AX',
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: AppColors.gold,
+                      color: AppColors.blue,
                       fontWeight: FontWeight.w900,
                     ),
                   ),

@@ -234,7 +234,7 @@ class _ContactRow extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         children: [
-          Icon(icon, color: AppColors.gold),
+          Icon(icon, color: AppColors.green),
           const SizedBox(width: 12),
           Expanded(
             child: Column(

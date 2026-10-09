@@ -17,8 +17,8 @@ class CartButton extends StatelessWidget {
       icon: Badge(
         isLabelVisible: count > 0,
         label: Text('$count'),
-        backgroundColor: AppColors.gold,
-        textColor: AppColors.primaryDark,
+        backgroundColor: AppColors.blue,
+        textColor: Colors.white,
         child: const Icon(Icons.shopping_bag_outlined),
       ),
     );

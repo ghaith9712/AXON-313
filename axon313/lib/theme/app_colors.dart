@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 abstract final class AppColors {
-  static const background = Color(0xFF060D1F);
-  static const surface = Color(0xFF111827);
-  static const primaryDark = Color(0xFF0A0D17);
-  static const hero = Color(0xFF1B2440);
-  static const text = Color(0xFFE2E8F0);
-  static const muted = Color(0xFF94A3B8);
-  static const gold = Color(0xFFF59E0B);
-  static const goldLight = Color(0xFFFCD34D);
-  static const cardBorder = Color(0x26FCD34D);
+  static const background = Color(0xFFF4F1EA);
+  static const surface = Color(0xFFFFFCF8);
+  static const text = Color(0xFF1C3348);
+  static const muted = Color(0xFF5E6E7A);
+  static const blue = Color(0xFF1F4E79);
+  static const blueSoft = Color(0xFFE5EEF6);
+  static const green = Color(0xFF3F7A63);
+  static const greenLight = Color(0xFFD9F0E4);
+  static const heroStart = Color(0xFFE8F6EE);
+  static const heroEnd = Color(0xFFE6EEF6);
+  static const border = Color(0xFFE4DDD4);
 }

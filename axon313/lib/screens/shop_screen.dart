@@ -66,7 +66,7 @@ class _ShopScreenState extends State<ShopScreen> {
                           Text(
                             categoryLabel(product.categoryId),
                             style: theme.textTheme.labelLarge?.copyWith(
-                              color: AppColors.gold,
+                              color: AppColors.green,
                             ),
                           ),
                           const SizedBox(height: 6),
@@ -88,7 +88,7 @@ class _ShopScreenState extends State<ShopScreen> {
                           Text(
                             formatIqd(product.priceIqd),
                             style: theme.textTheme.titleSmall?.copyWith(
-                              color: AppColors.goldLight,
+                              color: AppColors.blue,
                               fontWeight: FontWeight.w800,
                             ),
                           ),

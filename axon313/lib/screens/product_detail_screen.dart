@@ -57,7 +57,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     Text(
                       categoryLabel(product.categoryId),
                       style: theme.textTheme.labelLarge?.copyWith(
-                        color: AppColors.gold,
+                        color: AppColors.green,
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -71,7 +71,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     Text(
                       formatIqd(product.priceIqd),
                       style: theme.textTheme.headlineSmall?.copyWith(
-                        color: AppColors.goldLight,
+                        color: AppColors.blue,
                         fontWeight: FontWeight.w800,
                       ),
                     ),

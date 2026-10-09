@@ -65,7 +65,7 @@ class _CartScreenState extends State<CartScreen> {
               children: [
                 const Icon(
                   Icons.shopping_bag_outlined,
-                  color: AppColors.gold,
+                  color: AppColors.green,
                   size: 36,
                 ),
                 const SizedBox(height: 12),
@@ -118,7 +118,7 @@ class _CartScreenState extends State<CartScreen> {
                     Text(
                       formatIqd(line.product.priceIqd * line.quantity),
                       style: theme.textTheme.titleSmall?.copyWith(
-                        color: AppColors.goldLight,
+                        color: AppColors.blue,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -167,7 +167,7 @@ class _CartScreenState extends State<CartScreen> {
         Text(
           'المجموع: ${formatIqd(cart.total)}',
           style: theme.textTheme.headlineSmall?.copyWith(
-            color: AppColors.gold,
+            color: AppColors.blue,
             fontWeight: FontWeight.w800,
           ),
         ),
