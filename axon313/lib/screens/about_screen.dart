@@ -5,6 +5,7 @@ import '../data/company.dart';
 import '../theme/app_colors.dart';
 import '../widgets/axon_card.dart';
 import '../widgets/directional_value.dart';
+import '../widgets/page_banner.dart';
 import '../widgets/page_scroll.dart';
 import '../widgets/section_header.dart';
 
@@ -16,7 +17,13 @@ class AboutScreen extends StatelessWidget {
     final theme = Theme.of(context);
     return PageScroll(
       children: [
-        const SectionHeader(title: 'عن AXON-313', subtitle: Company.tagline),
+        const SizedBox(height: 8),
+        const PageBanner(
+          eyebrow: 'من نحن',
+          title: 'عن AXON-313',
+          subtitle: Company.tagline,
+        ),
+        const SizedBox(height: 24),
         Text(
           Company.about,
           style: theme.textTheme.bodyLarge?.copyWith(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../theme/app_colors.dart';
+import 'brand_mark.dart';
 import 'cart_button.dart';
 
 class AppShell extends StatelessWidget {
@@ -11,6 +12,7 @@ class AppShell extends StatelessWidget {
   final Widget child;
 
   static const _paths = ['/', '/services', '/shop', '/gallery', '/contact'];
+  static const _labels = ['الرئيسية', 'الخدمات', 'السوق', 'المعرض', 'تواصل'];
 
   int get _index {
     if (location.startsWith('/services')) return 1;
@@ -30,7 +32,15 @@ class AppShell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final wide = MediaQuery.sizeOf(context).width >= 960;
-    return wide ? _wide(context) : _phone(context);
+    return ColoredBox(
+      color: AppColors.background,
+      child: Stack(
+        children: [
+          const Positioned.fill(child: _Backdrop()),
+          wide ? _wide(context) : _phone(context),
+        ],
+      ),
+    );
   }
 
   Widget _phone(BuildContext context) {
@@ -41,171 +51,315 @@ class AppShell extends StatelessWidget {
       destinations: _destinations,
     );
     return Scaffold(
-      appBar: _bar(context, title: 'AXON-313'),
+      backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        titleSpacing: _showBack ? 0 : 20,
+        leading: _showBack
+            ? IconButton(
+                tooltip: 'رجوع',
+                onPressed: () => context.pop(),
+                icon: const BackButtonIcon(),
+              )
+            : null,
+        title: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: () => context.go('/'),
+          child: const _Brand(),
+        ),
+        actions: [
+          IconButton(
+            tooltip: 'من نحن',
+            onPressed: () => context.go('/about'),
+            icon: const Icon(Icons.info_outline_rounded),
+          ),
+          const CartButton(),
+          const SizedBox(width: 12),
+        ],
+      ),
       body: child,
-      bottomNavigationBar: hidden
-          ? NavigationBarTheme(
-              data: NavigationBarThemeData(
-                indicatorColor: Colors.transparent,
-                iconTheme: WidgetStateProperty.all(
-                  const IconThemeData(color: AppColors.muted),
+      bottomNavigationBar: DecoratedBox(
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.navy.withValues(alpha: 0.07),
+              blurRadius: 24,
+              offset: const Offset(0, -6),
+            ),
+          ],
+        ),
+        child: hidden
+            ? NavigationBarTheme(
+                data: NavigationBarThemeData(
+                  indicatorColor: Colors.transparent,
+                  iconTheme: WidgetStateProperty.all(
+                    const IconThemeData(color: AppColors.muted),
+                  ),
+                  labelTextStyle: WidgetStateProperty.all(
+                    Theme.of(context).textTheme.labelMedium
+                        ?.copyWith(color: AppColors.muted, fontSize: 12),
+                  ),
                 ),
-                labelTextStyle: WidgetStateProperty.all(
-                  Theme.of(context).textTheme.labelMedium
-                      ?.copyWith(color: AppColors.muted, fontSize: 12),
-                ),
-              ),
-              child: bar,
-            )
-          : bar,
+                child: bar,
+              )
+            : bar,
+      ),
     );
   }
 
   Widget _wide(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       body: Column(
         children: [
-          _topNav(context),
+          _TopNav(
+            index: _index,
+            showBack: _showBack,
+            paths: _paths,
+            labels: _labels,
+          ),
           Expanded(child: child),
         ],
       ),
     );
   }
 
-  Widget _topNav(BuildContext context) {
-    final theme = Theme.of(context);
-    const labels = ['الرئيسية', 'الخدمات', 'السوق', 'المعرض', 'تواصل'];
-    return Material(
-      key: const Key('desktop-nav'),
-      color: AppColors.surface,
-      child: DecoratedBox(
-        decoration: const BoxDecoration(
-          border: Border(bottom: BorderSide(color: AppColors.border)),
+  static const _destinations = [
+    NavigationDestination(
+      icon: Icon(Icons.home_outlined),
+      selectedIcon: Icon(Icons.home_rounded),
+      label: 'الرئيسية',
+    ),
+    NavigationDestination(
+      icon: Icon(Icons.grid_view_outlined),
+      selectedIcon: Icon(Icons.grid_view_rounded),
+      label: 'الخدمات',
+    ),
+    NavigationDestination(
+      icon: Icon(Icons.storefront_outlined),
+      selectedIcon: Icon(Icons.storefront_rounded),
+      label: 'السوق',
+    ),
+    NavigationDestination(
+      icon: Icon(Icons.photo_library_outlined),
+      selectedIcon: Icon(Icons.photo_library_rounded),
+      label: 'المعرض',
+    ),
+    NavigationDestination(
+      icon: Icon(Icons.chat_bubble_outline_rounded),
+      selectedIcon: Icon(Icons.chat_bubble_rounded),
+      label: 'تواصل',
+    ),
+  ];
+}
+
+class _Backdrop extends StatelessWidget {
+  const _Backdrop();
+
+  @override
+  Widget build(BuildContext context) {
+    return IgnorePointer(
+      child: Stack(
+        children: [
+          PositionedDirectional(
+            top: -180,
+            end: -140,
+            child: _Orb(
+              size: 520,
+              color: AppColors.mint.withValues(alpha: 0.5),
+            ),
+          ),
+          PositionedDirectional(
+            top: 240,
+            start: -220,
+            child: _Orb(
+              size: 520,
+              color: AppColors.blueMid.withValues(alpha: 0.16),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _Orb extends StatelessWidget {
+  const _Orb({required this.size, required this.color});
+
+  final double size;
+  final Color color;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: RadialGradient(colors: [color, color.withValues(alpha: 0)]),
+      ),
+    );
+  }
+}
+
+class _Brand extends StatelessWidget {
+  const _Brand();
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const BrandMark(size: 34),
+        const SizedBox(width: 10),
+        Text(
+          'AXON-313',
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            color: AppColors.navy,
+            fontWeight: FontWeight.w900,
+            letterSpacing: 0.4,
+          ),
         ),
-        child: SizedBox(
-          height: 74,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 28),
-            child: Row(
-              children: [
-                if (_showBack)
-                  IconButton(
-                    tooltip: 'رجوع',
-                    onPressed: () => context.pop(),
-                    icon: const BackButtonIcon(),
-                  ),
-                InkWell(
-                  onTap: () => context.go('/'),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 10,
-                        height: 10,
-                        decoration: const BoxDecoration(
-                          color: AppColors.greenMid,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Text(
-                        'AXON-313',
-                        style: theme.textTheme.titleLarge?.copyWith(
-                          color: AppColors.blue,
-                          fontWeight: FontWeight.w900,
-                        ),
-                      ),
-                    ],
-                  ),
+      ],
+    );
+  }
+}
+
+class _TopNav extends StatelessWidget {
+  const _TopNav({
+    required this.index,
+    required this.showBack,
+    required this.paths,
+    required this.labels,
+  });
+
+  final int index;
+  final bool showBack;
+  final List<String> paths;
+  final List<String> labels;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(32, 16, 32, 4),
+      child: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1180),
+          child: DecoratedBox(
+            key: const Key('desktop-nav'),
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.94),
+              borderRadius: BorderRadius.circular(40),
+              border: Border.all(color: AppColors.border),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.navy.withValues(alpha: 0.08),
+                  blurRadius: 30,
+                  offset: const Offset(0, 12),
                 ),
-                const SizedBox(width: 28),
-                for (var i = 0; i < labels.length; i++)
-                  _navLink(context, labels[i], i),
-                const Spacer(),
-                IconButton(
-                  tooltip: 'من نحن',
-                  onPressed: () => context.go('/about'),
-                  icon: const Icon(Icons.info_outline),
-                ),
-                const CartButton(),
               ],
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              child: Row(
+                children: [
+                  if (showBack)
+                    IconButton(
+                      tooltip: 'رجوع',
+                      onPressed: () => context.pop(),
+                      icon: const BackButtonIcon(),
+                    ),
+                  InkWell(
+                    borderRadius: BorderRadius.circular(20),
+                    onTap: () => context.go('/'),
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 6, vertical: 4),
+                      child: _Brand(),
+                    ),
+                  ),
+                  const Spacer(),
+                  for (var i = 0; i < labels.length; i++)
+                    _NavItem(
+                      label: labels[i],
+                      selected: index == i,
+                      onTap: () => context.go(paths[i]),
+                    ),
+                  const Spacer(),
+                  IconButton(
+                    tooltip: 'من نحن',
+                    onPressed: () => context.go('/about'),
+                    icon: const Icon(Icons.info_outline_rounded),
+                  ),
+                  const CartButton(),
+                  const SizedBox(width: 8),
+                  FilledButton(
+                    style: FilledButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 22,
+                        vertical: 14,
+                      ),
+                    ),
+                    onPressed: () => context.go('/contact'),
+                    child: const Text('اطلب خدمة'),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
       ),
     );
   }
+}
 
-  Widget _navLink(BuildContext context, String label, int index) {
-    final selected = _index == index;
-    return InkWell(
-      onTap: () => context.go(_paths[index]),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              label,
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                color: selected ? AppColors.blue : AppColors.muted,
-                fontWeight: selected ? FontWeight.w800 : FontWeight.w500,
-              ),
+class _NavItem extends StatefulWidget {
+  const _NavItem({
+    required this.label,
+    required this.selected,
+    required this.onTap,
+  });
+
+  final String label;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  State<_NavItem> createState() => _NavItemState();
+}
+
+class _NavItemState extends State<_NavItem> {
+  bool _hovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final selected = widget.selected;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 2),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(24),
+        onTap: widget.onTap,
+        onHover: (value) => setState(() => _hovered = value),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 260),
+          curve: Curves.easeOutCubic,
+          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+          decoration: BoxDecoration(
+            color: selected
+                ? AppColors.greenLight
+                : _hovered
+                ? AppColors.blueSoft
+                : Colors.transparent,
+            borderRadius: BorderRadius.circular(24),
+          ),
+          child: Text(
+            widget.label,
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+              color: selected ? AppColors.green : AppColors.muted,
+              fontWeight: selected ? FontWeight.w900 : FontWeight.w600,
             ),
-            const SizedBox(height: 6),
-            AnimatedContainer(
-              duration: const Duration(milliseconds: 180),
-              height: 2,
-              width: selected ? 22 : 0,
-              color: AppColors.greenMid,
-            ),
-          ],
+          ),
         ),
       ),
     );
   }
-
-  PreferredSizeWidget _bar(BuildContext context, {required String title}) {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      leading: _showBack ? BackButton(onPressed: () => context.pop()) : null,
-      title: Text(title),
-      actions: [
-        IconButton(
-          tooltip: 'من نحن',
-          onPressed: () => context.go('/about'),
-          icon: const Icon(Icons.info_outline),
-        ),
-        const CartButton(),
-        const SizedBox(width: 4),
-      ],
-    );
-  }
-
-  static const _destinations = [
-    NavigationDestination(
-      icon: Icon(Icons.home_outlined),
-      selectedIcon: Icon(Icons.home),
-      label: 'الرئيسية',
-    ),
-    NavigationDestination(
-      icon: Icon(Icons.design_services_outlined),
-      selectedIcon: Icon(Icons.design_services),
-      label: 'الخدمات',
-    ),
-    NavigationDestination(
-      icon: Icon(Icons.storefront_outlined),
-      selectedIcon: Icon(Icons.storefront),
-      label: 'السوق',
-    ),
-    NavigationDestination(
-      icon: Icon(Icons.photo_library_outlined),
-      selectedIcon: Icon(Icons.photo_library),
-      label: 'المعرض',
-    ),
-    NavigationDestination(
-      icon: Icon(Icons.chat_outlined),
-      selectedIcon: Icon(Icons.chat),
-      label: 'تواصل',
-    ),
-  ];
 }

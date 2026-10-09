@@ -6,8 +6,8 @@ import '../utils/external_links.dart';
 import '../utils/formatting.dart';
 import '../widgets/axon_card.dart';
 import '../widgets/directional_value.dart';
+import '../widgets/page_banner.dart';
 import '../widgets/page_scroll.dart';
-import '../widgets/section_header.dart';
 
 class ContactScreen extends StatefulWidget {
   const ContactScreen({super.key});
@@ -60,10 +60,13 @@ class _ContactScreenState extends State<ContactScreen> {
     final theme = Theme.of(context);
     return PageScroll(
       children: [
-        const SectionHeader(
+        const SizedBox(height: 8),
+        const PageBanner(
+          eyebrow: 'تواصل',
           title: 'تواصل معنا',
           subtitle: 'صف المشروع باختصار، ونرد خلال أوقات العمل.',
         ),
+        const SizedBox(height: 24),
         LayoutBuilder(
           builder: (context, constraints) {
             final stacked = constraints.maxWidth < 800;

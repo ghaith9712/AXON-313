@@ -12,6 +12,38 @@ import '../screens/services_screen.dart';
 import '../screens/shop_screen.dart';
 import '../widgets/app_shell.dart';
 
+Page<void> _page(GoRouterState state, Widget child) {
+  return CustomTransitionPage<void>(
+    key: state.pageKey,
+    child: child,
+    transitionDuration: const Duration(milliseconds: 460),
+    reverseTransitionDuration: const Duration(milliseconds: 320),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      final enter = CurvedAnimation(
+        parent: animation,
+        curve: Curves.easeOutCubic,
+      );
+      final exit = CurvedAnimation(
+        parent: secondaryAnimation,
+        curve: Curves.easeInCubic,
+      );
+      return FadeTransition(
+        opacity: ReverseAnimation(exit),
+        child: FadeTransition(
+          opacity: enter,
+          child: SlideTransition(
+            position: Tween(
+              begin: const Offset(0, 0.025),
+              end: Offset.zero,
+            ).animate(enter),
+            child: child,
+          ),
+        ),
+      );
+    },
+  );
+}
+
 GoRouter createRouter() {
   return GoRouter(
     initialLocation: '/',
@@ -24,41 +56,48 @@ GoRouter createRouter() {
           GoRoute(path: '/', builder: (context, state) => const HomeScreen()),
           GoRoute(
             path: '/services',
-            builder: (context, state) => const ServicesScreen(),
+            pageBuilder: (context, state) =>
+                _page(state, const ServicesScreen()),
             routes: [
               GoRoute(
                 path: ':id',
-                builder: (context, state) =>
-                    ServiceDetailScreen(id: state.pathParameters['id']!),
+                pageBuilder: (context, state) => _page(
+                  state,
+                  ServiceDetailScreen(id: state.pathParameters['id']!),
+                ),
               ),
             ],
           ),
           GoRoute(
             path: '/about',
-            builder: (context, state) => const AboutScreen(),
+            pageBuilder: (context, state) => _page(state, const AboutScreen()),
           ),
           GoRoute(
             path: '/gallery',
-            builder: (context, state) => const GalleryScreen(),
+            pageBuilder: (context, state) =>
+                _page(state, const GalleryScreen()),
           ),
           GoRoute(
             path: '/shop',
-            builder: (context, state) => const ShopScreen(),
+            pageBuilder: (context, state) => _page(state, const ShopScreen()),
             routes: [
               GoRoute(
                 path: ':id',
-                builder: (context, state) =>
-                    ProductDetailScreen(id: state.pathParameters['id']!),
+                pageBuilder: (context, state) => _page(
+                  state,
+                  ProductDetailScreen(id: state.pathParameters['id']!),
+                ),
               ),
             ],
           ),
           GoRoute(
             path: '/cart',
-            builder: (context, state) => const CartScreen(),
+            pageBuilder: (context, state) => _page(state, const CartScreen()),
           ),
           GoRoute(
             path: '/contact',
-            builder: (context, state) => const ContactScreen(),
+            pageBuilder: (context, state) =>
+                _page(state, const ContactScreen()),
           ),
         ],
       ),

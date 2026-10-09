@@ -4,9 +4,9 @@ import '../data/catalog.dart';
 import '../models/catalog_models.dart';
 import '../theme/app_colors.dart';
 import '../widgets/axon_card.dart';
+import '../widgets/page_banner.dart';
 import '../widgets/page_scroll.dart';
 import '../widgets/responsive_cards.dart';
-import '../widgets/section_header.dart';
 
 class GalleryScreen extends StatelessWidget {
   const GalleryScreen({super.key});
@@ -15,10 +15,13 @@ class GalleryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return PageScroll(
       children: [
-        const SectionHeader(
+        const SizedBox(height: 8),
+        const PageBanner(
+          eyebrow: 'المعرض',
           title: 'معرض الأعمال',
           subtitle: 'صور من أعمال الكهرباء والمراقبة والشبكات والبرمجة.',
         ),
+        const SizedBox(height: 24),
         ResponsiveCards(
           children: [
             for (final work in galleryWorks)

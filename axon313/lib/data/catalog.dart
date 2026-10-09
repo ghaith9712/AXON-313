@@ -1,54 +1,138 @@
 import 'package:flutter/material.dart';
 
 import '../models/catalog_models.dart';
+import '../theme/app_colors.dart';
 
 const services = <ServiceOffering>[
   ServiceOffering(
     id: 'software',
     title: 'تصميم البرامج والأنظمة الرقمية',
+    shortTitle: 'البرامج والأنظمة',
+    tag: 'SOFTWARE',
     summary: 'مواقع وتطبيقات وأنظمة إدارة تُبنى على طريقة عملك، بالعربية ومن اليمين إلى اليسار.',
     description: 'نصمم ونبرمج البرامج من أول سؤال عن الإجراء اليومي حتى واجهة يستطيع فريقك استخدامها. يشمل ذلك المواقع التعريفية، تطبيقات الهاتف، لوحات المتابعة، وأنظمة المبيعات والمخزون. نفس الفكرة يمكن أن تعمل على الويب وويندوز والهاتف عندما يكون ذلك مناسباً للمشروع.',
-    icon: Icons.laptop_mac_outlined,
+    icon: Icons.code_rounded,
+    imageAsset: 'assets/images/webapp.jpg',
+    accent: AppColors.blue,
+    accentLight: AppColors.blueMid,
     points: [
       'تطبيقات ويب وهاتف بواجهة عربية',
       'أنظمة إدارة للمبيعات والمخزون والعملاء',
       'ربط التنبيهات والطلبات مع واتساب',
       'تسليم مع شرح مختصر لطريقة الاستخدام',
     ],
+    steps: [
+      WorkStep(
+        title: 'فهم الإجراء',
+        body: 'نسألك عن العمل اليومي ونحدد ما يجب أن يحل البرنامج.',
+      ),
+      WorkStep(
+        title: 'تصميم الواجهة',
+        body: 'نعرض لك شكل الشاشات قبل كتابة الكود.',
+      ),
+      WorkStep(
+        title: 'البرمجة والتجربة',
+        body: 'نبني النظام ونجربه معك على بيانات حقيقية.',
+      ),
+      WorkStep(
+        title: 'التسليم والمتابعة',
+        body: 'نسلّم النسخة النهائية مع شرح الاستخدام.',
+      ),
+    ],
   ),
   ServiceOffering(
     id: 'cameras',
     title: 'كاميرات المراقبة',
+    shortTitle: 'كاميرات المراقبة',
+    tag: 'SECURITY',
     summary: 'تغطية للمنازل والمحال والمباني، مع تسجيل ومشاهدة من الهاتف بعد التركيب.',
     description: 'نحدد عدد الكاميرات ومكانها حسب المداخل والزوايا والإضاءة، ثم نركّب الكاميرات وأجهزة التسجيل ونراجع الصورة معك قبل إنهاء العمل. يمكن اختيار كاميرا داخلية أو خارجية أو دوارة بحسب المسافة والمكان.',
-    icon: Icons.videocam_outlined,
+    icon: Icons.videocam_rounded,
+    imageAsset: 'assets/images/camera.webp',
+    accent: AppColors.green,
+    accentLight: AppColors.greenMid,
     points: [
       'كاميرات داخلية وخارجية بدقات مختلفة',
       'أجهزة تسجيل بعدد قنوات يناسب الموقع',
       'تخزين ومشاهدة عن بعد من الهاتف',
       'معاينة المكان قبل تثبيت العدد النهائي',
     ],
+    steps: [
+      WorkStep(
+        title: 'معاينة الموقع',
+        body: 'نزور المكان ونحدد الزوايا والمداخل ونقاط الضعف.',
+      ),
+      WorkStep(
+        title: 'اختيار الأجهزة',
+        body: 'نرشّح الكاميرات والتسجيل بما يناسب الميزانية.',
+      ),
+      WorkStep(
+        title: 'التمديد والتركيب',
+        body: 'تمديد منظم للكابلات وتثبيت نظيف للكاميرات.',
+      ),
+      WorkStep(
+        title: 'ضبط الصورة والتسليم',
+        body: 'نراجع الصورة معك ونربط المشاهدة بهاتفك.',
+      ),
+    ],
   ),
   ServiceOffering(
     id: 'digital',
     title: 'الخدمات الرقمية',
+    shortTitle: 'الخدمات الرقمية',
+    tag: 'DIGITAL',
     summary: 'شبكات وبنية تحتية وحضور رقمي يربط الأجهزة والأنظمة في مكان واحد.',
     description: 'نرتب شبكة البيانات، ونربط الأجهزة والفروع، ونجهّز حضوراً رقمياً بسيطاً للنشاط. الهدف أن تعمل الكاميرات والبرامج والاتصال معاً بدل أن يبقى كل جزء مستقلاً عن الآخر.',
-    icon: Icons.hub_outlined,
+    icon: Icons.hub_rounded,
+    imageAsset: 'assets/images/network.jpg',
+    accent: AppColors.teal,
+    accentLight: AppColors.tealMid,
     points: [
       'تمديد وتنظيم شبكات البيانات',
       'ربط الأجهزة ضمن بنية واحدة',
       'صفحات تعريفية للنشاط',
       'استشارة عملية قبل بدء التنفيذ',
     ],
+    steps: [
+      WorkStep(
+        title: 'استشارة أولية',
+        body: 'نفهم أجهزتك وفروعك وما تريد ربطه.',
+      ),
+      WorkStep(
+        title: 'تخطيط البنية',
+        body: 'مخطط واضح للشبكة والأجهزة قبل التنفيذ.',
+      ),
+      WorkStep(
+        title: 'التنفيذ والربط',
+        body: 'تمديد وربط وضبط للإعدادات خطوة بخطوة.',
+      ),
+      WorkStep(
+        title: 'فحص وتسليم',
+        body: 'نختبر الاتصال ونسلّم المخطط والإعدادات.',
+      ),
+    ],
   ),
 ];
 
 const shopCategories = <ShopCategory>[
-  ShopCategory(id: 'all', label: 'الكل'),
-  ShopCategory(id: 'cameras', label: 'كاميرات'),
-  ShopCategory(id: 'recorders', label: 'أجهزة تسجيل'),
-  ShopCategory(id: 'software', label: 'باقات برمجية'),
+  ShopCategory(id: 'all', label: 'الكل', icon: Icons.apps_rounded),
+  ShopCategory(id: 'cameras', label: 'كاميرات', icon: Icons.videocam_rounded),
+  ShopCategory(
+    id: 'recorders',
+    label: 'أجهزة تسجيل',
+    icon: Icons.storage_rounded,
+  ),
+  ShopCategory(id: 'software', label: 'باقات برمجية', icon: Icons.code_rounded),
+];
+
+const processSteps = <WorkStep>[
+  WorkStep(title: 'نسمعك', body: 'وصف مختصر لما تحتاجه عبر واتساب أو الهاتف.'),
+  WorkStep(
+    title: 'نخطط',
+    body: 'معاينة أو اجتماع قصير، ثم سعر واضح قبل العمل.',
+  ),
+  WorkStep(title: 'ننفذ', body: 'عمل منظم مع عرض للنتيجة أثناء التنفيذ.'),
+  WorkStep(title: 'نسلّم ونتابع', body: 'شرح الاستخدام ودعم بعد التسليم.'),
 ];
 
 const products = <Product>[

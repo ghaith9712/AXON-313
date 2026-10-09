@@ -7,25 +7,39 @@ class AxonCard extends StatelessWidget {
     super.key,
     required this.child,
     this.onTap,
-    this.padding = const EdgeInsets.all(18),
+    this.padding = const EdgeInsets.all(22),
+    this.color = AppColors.surface,
   });
 
   final Widget child;
   final VoidCallback? onTap;
   final EdgeInsetsGeometry padding;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: AppColors.surface,
-      clipBehavior: Clip.antiAlias,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-        side: const BorderSide(color: AppColors.border),
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(26),
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.navy.withValues(alpha: 0.05),
+            blurRadius: 22,
+            offset: const Offset(0, 10),
+          ),
+        ],
       ),
-      child: InkWell(
-        onTap: onTap,
-        child: Padding(padding: padding, child: child),
+      child: Material(
+        color: color,
+        clipBehavior: Clip.antiAlias,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(26),
+          side: const BorderSide(color: AppColors.border),
+        ),
+        child: InkWell(
+          onTap: onTap,
+          child: Padding(padding: padding, child: child),
+        ),
       ),
     );
   }

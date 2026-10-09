@@ -19,18 +19,19 @@ ThemeData buildAppTheme() {
     dividerColor: AppColors.border,
   );
   final textTheme = GoogleFonts.tajawalTextTheme(base.textTheme)
-      .apply(bodyColor: AppColors.text, displayColor: AppColors.blue);
+      .apply(bodyColor: AppColors.text, displayColor: AppColors.navy);
 
   return base.copyWith(
     textTheme: textTheme,
     appBarTheme: AppBarTheme(
-      backgroundColor: AppColors.background,
-      foregroundColor: AppColors.blue,
+      backgroundColor: Colors.transparent,
+      foregroundColor: AppColors.navy,
+      scrolledUnderElevation: 0,
       surfaceTintColor: Colors.transparent,
       elevation: 0,
       centerTitle: false,
       titleTextStyle: textTheme.titleLarge?.copyWith(
-        color: AppColors.blue,
+        color: AppColors.navy,
         fontWeight: FontWeight.w900,
         fontSize: 22,
       ),
@@ -38,25 +39,29 @@ ThemeData buildAppTheme() {
     navigationBarTheme: NavigationBarThemeData(
       backgroundColor: AppColors.surface,
       indicatorColor: AppColors.greenLight,
-      height: 68,
+      height: 72,
+      elevation: 0,
+      surfaceTintColor: Colors.transparent,
+      indicatorShape: const StadiumBorder(),
       labelTextStyle: WidgetStateProperty.resolveWith((states) {
         final selected = states.contains(WidgetState.selected);
         return textTheme.labelMedium?.copyWith(
           fontSize: 12,
           fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
-          color: selected ? AppColors.blue : AppColors.muted,
+          color: selected ? AppColors.green : AppColors.muted,
         );
       }),
       iconTheme: WidgetStateProperty.resolveWith((states) {
         final selected = states.contains(WidgetState.selected);
         return IconThemeData(
-          color: selected ? AppColors.blue : AppColors.muted,
+          color: selected ? AppColors.green : AppColors.muted,
         );
       }),
     ),
     snackBarTheme: SnackBarThemeData(
       behavior: SnackBarBehavior.floating,
-      backgroundColor: AppColors.blue,
+      backgroundColor: AppColors.navy,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       contentTextStyle: textTheme.bodyMedium?.copyWith(color: Colors.white),
     ),
     inputDecorationTheme: InputDecorationTheme(
@@ -64,19 +69,19 @@ ThemeData buildAppTheme() {
       fillColor: AppColors.surface,
       labelStyle: textTheme.bodyMedium?.copyWith(color: AppColors.muted),
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
         borderSide: const BorderSide(color: AppColors.border),
       ),
       focusedBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
         borderSide: const BorderSide(color: AppColors.blue, width: 1.4),
       ),
       errorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
         borderSide: const BorderSide(color: Color(0xFFB42318)),
       ),
       focusedErrorBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(16),
         borderSide: const BorderSide(color: Color(0xFFB42318)),
       ),
     ),
@@ -85,17 +90,17 @@ ThemeData buildAppTheme() {
         backgroundColor: AppColors.blue,
         foregroundColor: Colors.white,
         textStyle: textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 16),
+        shape: const StadiumBorder(),
       ),
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         foregroundColor: AppColors.blue,
-        side: const BorderSide(color: AppColors.blue, width: 1.2),
+        side: const BorderSide(color: AppColors.blue, width: 1.3),
         textStyle: textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 16),
+        shape: const StadiumBorder(),
       ),
     ),
     chipTheme: base.chipTheme.copyWith(
