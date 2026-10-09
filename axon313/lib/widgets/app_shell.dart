@@ -27,18 +27,6 @@ class AppShell extends StatelessWidget {
     return parts.length > 1;
   }
 
-  String get _title {
-    if (location.startsWith('/services/')) return 'تفاصيل الخدمة';
-    if (location.startsWith('/services')) return 'خدماتنا';
-    if (location.startsWith('/shop/')) return 'تفاصيل المنتج';
-    if (location.startsWith('/shop')) return 'السوق';
-    if (location.startsWith('/gallery')) return 'معرض الأعمال';
-    if (location.startsWith('/contact')) return 'تواصل معنا';
-    if (location.startsWith('/about')) return 'عن AXON-313';
-    if (location.startsWith('/cart')) return 'السلة';
-    return 'الرئيسية';
-  }
-
   @override
   Widget build(BuildContext context) {
     final wide = MediaQuery.sizeOf(context).width >= 960;
@@ -74,88 +62,104 @@ class AppShell extends StatelessWidget {
   }
 
   Widget _wide(BuildContext context) {
-    final extended = MediaQuery.sizeOf(context).width >= 1200;
-    final hidden = _index < 0;
     return Scaffold(
-      body: Row(
+      body: Column(
         children: [
-          NavigationRail(
-            extended: extended,
-            minExtendedWidth: 220,
-            backgroundColor: AppColors.surface,
-            selectedIndex: hidden ? 0 : _index,
-            groupAlignment: -1,
-            onDestinationSelected: (index) => context.go(_paths[index]),
-            indicatorColor: hidden ? Colors.transparent : AppColors.greenLight,
-            selectedIconTheme: IconThemeData(
-              color: hidden ? AppColors.muted : AppColors.blue,
-            ),
-            unselectedIconTheme: const IconThemeData(color: AppColors.muted),
-            selectedLabelTextStyle: Theme.of(context).textTheme.labelLarge
-                ?.copyWith(
-                  color: hidden ? AppColors.muted : AppColors.blue,
-                  fontWeight: FontWeight.w700,
-                ),
-            unselectedLabelTextStyle: Theme.of(context).textTheme.labelLarge
-                ?.copyWith(color: AppColors.muted),
-            leading: Padding(
-              padding: const EdgeInsets.fromLTRB(8, 16, 8, 12),
-              child: InkWell(
-                onTap: () => context.go('/'),
-                borderRadius: BorderRadius.circular(8),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 8,
-                    vertical: 6,
-                  ),
-                  child: Text(
-                    extended ? 'AXON-313' : 'AX',
-                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      color: AppColors.blue,
-                      fontWeight: FontWeight.w900,
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            destinations: const [
-              NavigationRailDestination(
-                icon: Icon(Icons.home_outlined),
-                selectedIcon: Icon(Icons.home),
-                label: Text('الرئيسية'),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.design_services_outlined),
-                selectedIcon: Icon(Icons.design_services),
-                label: Text('الخدمات'),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.storefront_outlined),
-                selectedIcon: Icon(Icons.storefront),
-                label: Text('السوق'),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.photo_library_outlined),
-                selectedIcon: Icon(Icons.photo_library),
-                label: Text('المعرض'),
-              ),
-              NavigationRailDestination(
-                icon: Icon(Icons.chat_outlined),
-                selectedIcon: Icon(Icons.chat),
-                label: Text('تواصل'),
-              ),
-            ],
-          ),
-          const VerticalDivider(width: 1),
-          Expanded(
-            child: Column(
+          _topNav(context),
+          Expanded(child: child),
+        ],
+      ),
+    );
+  }
+
+  Widget _topNav(BuildContext context) {
+    final theme = Theme.of(context);
+    const labels = ['الرئيسية', 'الخدمات', 'السوق', 'المعرض', 'تواصل'];
+    return Material(
+      key: const Key('desktop-nav'),
+      color: AppColors.surface,
+      child: DecoratedBox(
+        decoration: const BoxDecoration(
+          border: Border(bottom: BorderSide(color: AppColors.border)),
+        ),
+        child: SizedBox(
+          height: 74,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 28),
+            child: Row(
               children: [
-                _bar(context, title: _title),
-                Expanded(child: child),
+                if (_showBack)
+                  IconButton(
+                    tooltip: 'رجوع',
+                    onPressed: () => context.pop(),
+                    icon: const BackButtonIcon(),
+                  ),
+                InkWell(
+                  onTap: () => context.go('/'),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: 10,
+                        height: 10,
+                        decoration: const BoxDecoration(
+                          color: AppColors.greenMid,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Text(
+                        'AXON-313',
+                        style: theme.textTheme.titleLarge?.copyWith(
+                          color: AppColors.blue,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 28),
+                for (var i = 0; i < labels.length; i++)
+                  _navLink(context, labels[i], i),
+                const Spacer(),
+                IconButton(
+                  tooltip: 'من نحن',
+                  onPressed: () => context.go('/about'),
+                  icon: const Icon(Icons.info_outline),
+                ),
+                const CartButton(),
               ],
             ),
           ),
-        ],
+        ),
+      ),
+    );
+  }
+
+  Widget _navLink(BuildContext context, String label, int index) {
+    final selected = _index == index;
+    return InkWell(
+      onTap: () => context.go(_paths[index]),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              label,
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: selected ? AppColors.blue : AppColors.muted,
+                fontWeight: selected ? FontWeight.w800 : FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: 6),
+            AnimatedContainer(
+              duration: const Duration(milliseconds: 180),
+              height: 2,
+              width: selected ? 22 : 0,
+              color: AppColors.greenMid,
+            ),
+          ],
+        ),
       ),
     );
   }

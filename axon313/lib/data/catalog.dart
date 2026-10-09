@@ -70,7 +70,7 @@ const products = <Product>[
     description: 'كاميرا خارجية بدقة 4 ميغابكسل لتغطية الواجهة أو الموقف. نحدد العدسة بعد رؤية المسافة والإضاءة الليلية.',
     priceIqd: 145000,
     icon: Icons.videocam_outlined,
-    imageAsset: 'assets/images/camera.webp',
+    imageAsset: 'assets/images/electrical.webp',
   ),
   Product(
     id: 'cam-ptz',
@@ -80,7 +80,7 @@ const products = <Product>[
     description: 'كاميرا PTZ للساحات والمواقع التي تحتاج متابعة حركة واسعة. التركيب يشمل توجيهاً أولياً ونقاط الحفظ.',
     priceIqd: 390000,
     icon: Icons.control_camera_outlined,
-    imageAsset: 'assets/images/camera.webp',
+    imageAsset: 'assets/images/control.jpg',
   ),
   Product(
     id: 'nvr-4',

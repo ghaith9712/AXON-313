@@ -91,8 +91,8 @@ ThemeData buildAppTheme() {
     ),
     outlinedButtonTheme: OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        foregroundColor: AppColors.green,
-        side: const BorderSide(color: AppColors.green, width: 1.4),
+        foregroundColor: AppColors.blue,
+        side: const BorderSide(color: AppColors.blue, width: 1.2),
         textStyle: textTheme.titleSmall?.copyWith(fontWeight: FontWeight.w800),
         padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

@@ -37,13 +37,13 @@ void main() {
     expect(find.textContaining('75,000'), findsWidgets);
   });
 
-  testWidgets('wide layout shows a side rail', (tester) async {
+  testWidgets('wide layout shows a top navigation bar', (tester) async {
     _setSize(tester, const Size(1400, 900));
 
     await tester.pumpWidget(const AxonApp());
     await tester.pumpAndSettle();
 
-    expect(find.byType(NavigationRail), findsOneWidget);
+    expect(find.byKey(const Key('desktop-nav')), findsOneWidget);
     expect(find.byType(NavigationBar), findsNothing);
     expect(find.text('AXON-313'), findsWidgets);
   });
