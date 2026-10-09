@@ -5,6 +5,7 @@ import '../theme/app_colors.dart';
 import '../utils/external_links.dart';
 import '../utils/formatting.dart';
 import '../widgets/axon_card.dart';
+import '../widgets/directional_value.dart';
 import '../widgets/page_scroll.dart';
 import '../widgets/section_header.dart';
 
@@ -155,11 +156,13 @@ class _ContactScreenState extends State<ContactScreen> {
                     icon: Icons.call_outlined,
                     title: 'اتصل بنا',
                     value: Company.phoneDisplay,
+                    ltr: true,
                   ),
                   _ContactRow(
                     icon: Icons.mail_outline,
                     title: 'البريد الإلكتروني',
                     value: Company.email,
+                    ltr: true,
                   ),
                   _ContactRow(
                     icon: Icons.schedule_outlined,
@@ -217,11 +220,13 @@ class _ContactRow extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.value,
+    this.ltr = false,
   });
 
   final IconData icon;
   final String title;
   final String value;
+  final bool ltr;
 
   @override
   Widget build(BuildContext context) {
@@ -240,7 +245,7 @@ class _ContactRow extends StatelessWidget {
                   style: Theme.of(context).textTheme.labelLarge
                       ?.copyWith(color: AppColors.muted),
                 ),
-                Text(value),
+                DirectionalValue(value: value, ltr: ltr),
               ],
             ),
           ),

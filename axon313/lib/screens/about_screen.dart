@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../data/company.dart';
 import '../theme/app_colors.dart';
 import '../widgets/axon_card.dart';
+import '../widgets/directional_value.dart';
 import '../widgets/page_scroll.dart';
 import '../widgets/section_header.dart';
 
@@ -59,11 +60,13 @@ class AboutScreen extends StatelessWidget {
                 icon: Icons.call_outlined,
                 title: 'الهاتف',
                 value: Company.phoneDisplay,
+                ltr: true,
               ),
               _Fact(
                 icon: Icons.mail_outline,
                 title: 'البريد',
                 value: Company.email,
+                ltr: true,
               ),
               _Fact(
                 icon: Icons.schedule_outlined,
@@ -85,11 +88,17 @@ class AboutScreen extends StatelessWidget {
 }
 
 class _Fact extends StatelessWidget {
-  const _Fact({required this.icon, required this.title, required this.value});
+  const _Fact({
+    required this.icon,
+    required this.title,
+    required this.value,
+    this.ltr = false,
+  });
 
   final IconData icon;
   final String title;
   final String value;
+  final bool ltr;
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +117,7 @@ class _Fact extends StatelessWidget {
                   style: Theme.of(context).textTheme.labelLarge
                       ?.copyWith(color: AppColors.muted),
                 ),
-                Text(value),
+                DirectionalValue(value: value, ltr: ltr),
               ],
             ),
           ),
